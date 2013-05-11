@@ -14,7 +14,9 @@ It's the simplest plugin to easily get your CakePHP hooked with Elastic Search.
 	
 ### Via Composer
 
-Coming soon …
+Just add *kamisama/bounce* to your require, in your app composer.json.
+
+### Load the plugin
 
 Load the plugin into your app by editing your Config/bootstrap.php
 

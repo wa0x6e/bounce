@@ -26,6 +26,7 @@ App::uses('HttpSocket', 'Network/Http');
 class IndexableBehavior extends ModelBehavior {
 
 	protected $_defaults = array(
+		'index' => 'main',
 		'mapping' => false // False, index all fields
 	);
 

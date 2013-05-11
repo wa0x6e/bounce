@@ -142,13 +142,17 @@ class IndexableBehavior extends ModelBehavior {
 	}
 
 	public function map($Model) {
+		if ($this->settings[$Model->alias]['mapping'] === false) {
+			return true;
+		}
+
 		$mapping = Hash::flatten($this->settings[$Model->alias]['mapping']);
 		foreach ($mapping as $key => $value) {
 			$mapping[$key] = array('type' => $value);
 		}
 
 		$data = array(
-			$this->settings[$Model->alias]['index'] => array(
+			$this->settings[$Model->alias]['type'] => array(
 				'properties' => $mapping
 			)
 		);

@@ -19,16 +19,16 @@
 /**
  * Index Shell
  */
-
+App::uses('ClassRegistry', 'Utility');
 class IndexShell extends AppShell {
 
 	public function mapping() {
-		if (!isset($this->args[0]) || empty($this->args[0]) {
+		if (!isset($this->args[0]) || empty($this->args[0])) {
 			return $this->err('Please input a model');
 		}
 
 		$model = ClassRegistry::init($this->args[0]);
-		if ($model->attachedBehaviors('Bounce.Indexable')) {
+		if ($model->Behaviors->loaded('Indexable')) {
 			$model->map();
 		} else {
 			return $this->err('This model is not attached to the indexable behavior');

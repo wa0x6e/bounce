@@ -3,7 +3,7 @@ Bounce [![Build Status](https://travis-ci.org/kamisama/bounce.png)](https://trav
 
 A very lightweight CakePhp plugin to make your models automagically indexable by Elastic Search
 
-Just install the plugin and attach the **Bounce.IndexableBehavior**, … and voila !
+Just install the plugin and attach the **Bounce.Indexable**, … and voila !
 It's the simplest plugin to easily get your CakePHP hooked with Elastic Search.
 
 ## Installation

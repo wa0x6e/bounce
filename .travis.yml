@@ -1,0 +1,30 @@
+language: php
+
+php:
+  - 5.3
+  - 5.4
+
+env:
+  - CAKE_VERSION=2.2.8 DB=mysql
+  - CAKE_VERSION=master DB=mysql
+  - CAKE_VERSION=2.4 DB=mysql
+
+before_script:
+  - git clone git://github.com/cakephp/cakephp ../cakephp && cd ../cakephp && git checkout $CAKE_VERSION
+  - cp -R ../bounce app/Plugin/Bounce
+  - chmod -R 777 ../cakephp/app/tmp
+  - set +H
+  - echo "
+
+    CakePlugin::loadAll(array('Bounce' => array('bootstrap' => true)));" >> ../cakephp/app/Config/bootstrap.php
+  - cd app/Plugin/Bounce
+  - composer self-update
+  - composer install --prefer-source --dev
+  - cd ../../Console
+
+script:
+  - mkdir -p build/logs
+  - ./cake test Bounce AllBounce --stderr --configuration ../Plugin/Bounce/Test/phpunit.xml
+
+after_script:
+  - php ../Plugin/Bounce/vendor/bin/coveralls -v

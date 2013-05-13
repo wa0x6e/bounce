@@ -21,7 +21,7 @@ class IndexableBehaviorTest extends CakeTestCase {
 
 		$this->Index = $this->getMock(
 			'IndexableBehavior',
-			array('_addIndex', '_updateIndex', '_deleteIndex', 'filterData', 'beforeIndex'),
+			array('addIndex', 'updateIndex', 'deleteIndex', 'filterData', 'beforeIndex'),
 			array(),
 			'',
 			false
@@ -51,7 +51,7 @@ class IndexableBehaviorTest extends CakeTestCase {
 	 */
 
 	public function testAfterSaveCreateIndex() {
-		$this->Index->expects($this->once())->method('_addIndex');
+		$this->Index->expects($this->once())->method('addIndex');
 		$this->Index->expects($this->once())->method('filterData')->will($this->returnValue(array(1)));
 		$this->Index->expects($this->once())->method('beforeIndex')->will($this->returnValue(true));
 
@@ -60,7 +60,7 @@ class IndexableBehaviorTest extends CakeTestCase {
 	}
 
 	public function testAfterSaveUpdateIndex() {
-		$this->Index->expects($this->once())->method('_updateIndex');
+		$this->Index->expects($this->once())->method('updateIndex');
 		$this->Index->expects($this->once())->method('filterData')->will($this->returnValue(array(1)));
 		$this->Index->expects($this->once())->method('beforeIndex')->will($this->returnValue(true));
 
@@ -69,7 +69,7 @@ class IndexableBehaviorTest extends CakeTestCase {
 	}
 
 	public function testAfterDeleteDeleteIndex() {
-		$this->Index->expects($this->once())->method('_deleteIndex');
+		$this->Index->expects($this->once())->method('deleteIndex');
 		$this->Index->expects($this->once())->method('beforeIndex')->will($this->returnValue(true));
 
 		$this->Model->id = 1;
@@ -78,7 +78,7 @@ class IndexableBehaviorTest extends CakeTestCase {
 	}
 
 	public function testAfterDeleteDeleteIndexOnNonExistentId() {
-		$this->Index->expects($this->never())->method('_deleteIndex');
+		$this->Index->expects($this->never())->method('deleteIndex');
 		$this->Index->expects($this->once())->method('beforeIndex')->will($this->returnValue(true));
 
 		$this->Model->id = null;
@@ -87,7 +87,7 @@ class IndexableBehaviorTest extends CakeTestCase {
 	}
 
 	public function testAfterSaveCreateIndexWhenBeforeIndexConditionNotMet() {
-		$this->Index->expects($this->never())->method('_addIndex');
+		$this->Index->expects($this->never())->method('addIndex');
 		$this->Index->expects($this->never())->method('filterData');
 		$this->Index->expects($this->once())->method('beforeIndex')->will($this->returnValue(false));
 
@@ -96,7 +96,7 @@ class IndexableBehaviorTest extends CakeTestCase {
 	}
 
 	public function testAfterSaveUpdateIndexWhenBeforeIndexConditionNotMet() {
-		$this->Index->expects($this->never())->method('_updateIndex');
+		$this->Index->expects($this->never())->method('updateIndex');
 		$this->Index->expects($this->never())->method('filterData');
 		$this->Index->expects($this->once())->method('beforeIndex')->will($this->returnValue(false));
 
@@ -105,7 +105,7 @@ class IndexableBehaviorTest extends CakeTestCase {
 	}
 
 	public function testAfterSaveSkipIndexingWhenThereIsNoData() {
-		$this->Index->expects($this->never())->method('_updateIndex');
+		$this->Index->expects($this->never())->method('updateIndex');
 		$this->Index->expects($this->never())->method('filterData');
 		$this->Index->expects($this->once())->method('beforeIndex')->will($this->returnValue(true));
 
@@ -117,7 +117,7 @@ class IndexableBehaviorTest extends CakeTestCase {
 	}
 
 	public function testAfterSaveSkipIndexingWhenThereIsNoWhiteListedData() {
-		$this->Index->expects($this->never())->method('_updateIndex');
+		$this->Index->expects($this->never())->method('updateIndex');
 		$this->Index->expects($this->once())->method('filterData')->will($this->returnValue(array()));
 		$this->Index->expects($this->once())->method('beforeIndex')->will($this->returnValue(true));
 
@@ -129,7 +129,7 @@ class IndexableBehaviorTest extends CakeTestCase {
 	}
 
 	public function testAfterDeleteDeleteIndexWhenBeforeIndexConditionNotMet() {
-		$this->Index->expects($this->never())->method('_deleteIndex');
+		$this->Index->expects($this->never())->method('deleteIndex');
 		$this->Index->expects($this->once())->method('beforeIndex')->will($this->returnValue(false));
 
 		$this->Index->setUp($this->Model, $this->settings);
@@ -208,15 +208,15 @@ class IndexableBehaviorTest extends CakeTestCase {
 	}
 
 /**
- * @covers IndexableBehavior::_addIndex
+ * @covers IndexableBehavior::addIndex
  */
 	public function testaddIndex() {
-		$method = new ReflectionMethod('IndexableBehavior', '_addIndex');
+		$method = new ReflectionMethod('IndexableBehavior', 'addIndex');
 		$method->setAccessible(true);
 
 		$this->Index = $this->getMock(
 			'IndexableBehavior',
-			array('_addIndex', '_updateIndex', '_deleteIndex', 'filterData', 'beforeIndex', '_sendRequest'),
+			array('addIndex', 'updateIndex', 'deleteIndex', 'filterData', 'beforeIndex', '_sendRequest'),
 			array(),
 			'',
 			false
@@ -234,15 +234,15 @@ class IndexableBehaviorTest extends CakeTestCase {
 	}
 
 /**
- * @covers IndexableBehavior::_updateIndex
+ * @covers IndexableBehavior::updateIndex
  */
 	public function testUpdateIndex() {
-		$method = new ReflectionMethod('IndexableBehavior', '_updateIndex');
+		$method = new ReflectionMethod('IndexableBehavior', 'updateIndex');
 		$method->setAccessible(true);
 
 		$this->Index = $this->getMock(
 			'IndexableBehavior',
-			array('_addIndex', '_updateIndex', '_deleteIndex', 'filterData', 'beforeIndex', '_sendRequest'),
+			array('addIndex', 'updateIndex', 'deleteIndex', 'filterData', 'beforeIndex', '_sendRequest'),
 			array(),
 			'',
 			false
@@ -260,15 +260,15 @@ class IndexableBehaviorTest extends CakeTestCase {
 	}
 
 /**
- * @covers IndexableBehavior::_deleteIndex
+ * @covers IndexableBehavior::deleteIndex
  */
 	public function testDeleteIndex() {
-		$method = new ReflectionMethod('IndexableBehavior', '_deleteIndex');
+		$method = new ReflectionMethod('IndexableBehavior', 'deleteIndex');
 		$method->setAccessible(true);
 
 		$this->Index = $this->getMock(
 			'IndexableBehavior',
-			array('_addIndex', '_updateIndex', '_deleteIndex', 'filterData', 'beforeIndex', '_sendRequest'),
+			array('addIndex', 'updateIndex', 'deleteIndex', 'filterData', 'beforeIndex', '_sendRequest'),
 			array(),
 			'',
 			false

@@ -57,9 +57,9 @@ class IndexableBehavior extends ModelBehavior {
 		}
 
 		if ($created) {
-			$this->_addIndex($Model, $Model->id, $data);
+			$this->addIndex($Model, $Model->id, $data);
 		} else {
-			$this->_updateIndex($Model, $Model->id, $data);
+			$this->updateIndex($Model, $Model->id, $data);
 		}
 
 		return true;
@@ -74,7 +74,7 @@ class IndexableBehavior extends ModelBehavior {
 			return false;
 		}
 
-		return $this->_deleteIndex($Model, $Model->id);
+		return $this->deleteIndex($Model, $Model->id);
 	}
 
 /**
@@ -110,18 +110,27 @@ class IndexableBehavior extends ModelBehavior {
 		}
 
 		$fields = array_intersect_key($fields, $whitelist);
+
+		if (isset($fields['created']) && $fields['created'] instanceof MongoDate) {
+			$fields['created'] = date('Y-m-d H:i:s', $fields['created']->sec);
+		}
+
+		if (isset($fields['modified']) && $fields['modified'] instanceof MongoDate) {
+			$fields['modified'] = date('Y-m-d H:i:s', $fields['modified']->sec);
+		}
+
 		return Hash::expand($fields);
 	}
 
-	protected function _addIndex($Model, $id, $data) {
+	public function addIndex($Model, $id, $data) {
 		return $this->_sendRequest('PUT', $this->settings[$Model->alias]['request'], $id, $data);
 	}
 
-	protected function _updateIndex($Model, $id, $data) {
+	public function updateIndex($Model, $id, $data) {
 		return $this->_sendRequest('POST', $this->settings[$Model->alias]['request'], $id . '/_update', $data);
 	}
 
-	protected function _deleteIndex($Model, $id) {
+	public function deleteIndex($Model, $id) {
 		return $this->_sendRequest('DELETE', $this->settings[$Model->alias]['request'], $id);
 	}
 
@@ -162,7 +171,7 @@ class IndexableBehavior extends ModelBehavior {
 
 }
 
-function compArray ($val1, $val2) {
+function compArray($val1, $val2) {
 	if (is_array($val1) && is_array($val2)) {
 		return array_intersect_ukey($val1, $val2, 'compArray');
 	} else {

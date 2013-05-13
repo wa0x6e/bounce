@@ -21,36 +21,36 @@ before_script:
     CakePlugin::loadAll(array('Bounce' => array('bootstrap' => true)));" >> ../cakephp/app/Config/bootstrap.php
   - echo "class DATABASE_CONFIG {
 
-	public $default = array(
-		'datasource' => 'Database/Mysql',
-		'persistent' => false,
-		'host' => '127.0.0.1',
-		'login' => 'root',
-		'password' => '',
-		'database' => 'myapp',
-		'prefix' => '',
-	);
+        public $default = array(
+            'datasource' => 'Database/Mysql',
+            'persistent' => false,
+            'host' => '127.0.0.1',
+            'login' => 'root',
+            'password' => '',
+            'database' => 'myapp',
+            'prefix' => '',
+        );
 
-	public $default = array(
-		'datasource' => 'Database/Mysql',
-		'persistent' => false,
-		'host' => '127.0.0.1',
-		'login' => 'root',
-		'password' => '',
-		'database' => 'myapp_test',
-		'prefix' => '',
-	);
-}" >> ../cakephp/app/Config/database.php
+        public $default = array(
+            'datasource' => 'Database/Mysql',
+            'persistent' => false,
+            'host' => '127.0.0.1',
+            'login' => 'root',
+            'password' => '',
+            'database' => 'myapp_test',
+            'prefix' => '',
+        );
+    }" >> ../cakephp/app/Config/database.php
   - mysql -e 'create database myapp_test;'
   - mysql -e 'use myapp_test; CREATE TABLE IF NOT EXISTS `model_classes` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `title` text,
-  `track` int(11) DEFAULT NULL,
-  `length` int(11) DEFAULT NULL,
-  `created` datetime DEFAULT NULL,
-  `modified` datetime DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1;'
+      `id` int(11) NOT NULL AUTO_INCREMENT,
+      `title` text,
+      `track` int(11) DEFAULT NULL,
+      `length` int(11) DEFAULT NULL,
+      `created` datetime DEFAULT NULL,
+      `modified` datetime DEFAULT NULL,
+      PRIMARY KEY (`id`)
+    ) ENGINE=InnoDB  DEFAULT CHARSET=latin1;'
   - cd app/Plugin/Bounce
   - composer self-update
   - composer install --prefer-source --dev

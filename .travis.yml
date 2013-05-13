@@ -28,7 +28,7 @@ before_script:
             'login' => 'root',
             'password' => '',
             'database' => 'myapp',
-            'prefix' => '',
+            'prefix' => ''
         );
 
         public $test = array(
@@ -38,7 +38,7 @@ before_script:
             'login' => 'root',
             'password' => '',
             'database' => 'myapp_test',
-            'prefix' => '',
+            'prefix' => ''
         );
     }" >> ../cakephp/app/Config/database.php
   - mysql -e 'create database myapp_test;'

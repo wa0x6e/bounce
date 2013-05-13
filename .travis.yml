@@ -21,7 +21,7 @@ before_script:
     CakePlugin::loadAll(array('Bounce' => array('bootstrap' => true)));" >> ../cakephp/app/Config/bootstrap.php
   - echo "<?php class DATABASE_CONFIG {
 
-        public $default = array(
+        public \$default = array(
             'datasource' => 'Database/Mysql',
             'persistent' => false,
             'host' => '127.0.0.1',
@@ -31,7 +31,7 @@ before_script:
             'prefix' => ''
         );
 
-        public $test = array(
+        public \$test = array(
             'datasource' => 'Database/Mysql',
             'persistent' => false,
             'host' => '127.0.0.1',

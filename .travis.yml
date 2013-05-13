@@ -19,7 +19,7 @@ before_script:
   - echo "
 
     CakePlugin::loadAll(array('Bounce' => array('bootstrap' => true)));" >> ../cakephp/app/Config/bootstrap.php
-  - echo "class DATABASE_CONFIG {
+  - echo "<?php class DATABASE_CONFIG {
 
         public $default = array(
             'datasource' => 'Database/Mysql',

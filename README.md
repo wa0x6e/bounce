@@ -1,4 +1,4 @@
-Bounce [![Build Status](https://travis-ci.org/kamisama/bounce.png)](https://travis-ci.org/kamisama/bounce) [![Coverage Status](https://coveralls.io/repos/kamisama/bounce/badge.png)](https://coveralls.io/r/kamisama/bounce)
+Bounce [![Build Status](https://travis-ci.org/kamisama/bounce.png)](https://travis-ci.org/kamisama/bounce) [![Coverage Status](https://coveralls.io/repos/kamisama/bounce/badge.png)](https://coveralls.io/r/kamisama/bounce) [![Dependency Status](https://www.versioneye.com/package/php--kamisama--bounce/badge.png)](https://www.versioneye.com/package/php--kamisama--bounce)
 ======
 
 A very lightweight CakePhp plugin to make your models automagically indexable by Elastic Search
